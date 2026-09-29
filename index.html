@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#140a04" />
+<title>Fantasy Basketball Draft Lottery</title>
+<meta name="description" content="A locked, replayable bingo-ball fantasy basketball draft order reveal." />
+<style>
+:root{
+  --bg:#120803;--panel:#211006;--panel2:#2a1609;--ink:#fff8ef;--muted:#c9b8a7;
+  --line:rgba(255,255,255,.12);--orange:#ff7a18;--orange2:#ff9f3d;--cream:#ffe0b2;--gold:#ffd166;
+  --purple:#a970ff;--green:#88f08f;--shadow:0 24px 80px rgba(0,0,0,.48)
+}
+*{box-sizing:border-box}html{background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+radial-gradient(circle at 50% -6%,rgba(255,122,24,.23),transparent 32rem),
+linear-gradient(180deg,#180b04 0%,#100703 64%,#090401 100%);overflow-x:hidden}
+.court{position:fixed;inset:0;pointer-events:none;opacity:.055;background:
+linear-gradient(90deg,transparent 49.8%,#fff 49.9% 50.1%,transparent 50.2%),
+radial-gradient(circle at 50% 50%,transparent 0 88px,#fff 89px 91px,transparent 92px),
+repeating-linear-gradient(90deg,rgba(255,255,255,.4) 0 1px,transparent 1px 110px);
+mask-image:linear-gradient(to bottom,transparent,#000 16%,#000 88%,transparent)}
+main{width:min(1120px,calc(100% - 26px));margin:0 auto;padding:34px 0 64px;position:relative}
+header{text-align:center;margin-bottom:24px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--orange2);background:rgba(255,122,24,.07);font-size:12px;letter-spacing:.14em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 15px rgba(255,122,24,.8)}
+h1{font-size:clamp(36px,7vw,68px);line-height:.95;letter-spacing:-.055em;margin:16px auto 10px;max-width:870px}h1 span{color:var(--orange2)}
+.sub{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.55;font-size:15px}
+.layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:18px;align-items:start}.card{background:linear-gradient(180deg,rgba(43,23,9,.97),rgba(24,11,4,.97));border:1px solid var(--line);border-radius:25px;box-shadow:var(--shadow)}
+.machine-card{padding:20px;overflow:hidden;position:relative}.machine-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.machine-top strong{font-size:14px}.lock{font-size:11px;color:var(--gold);border:1px solid rgba(255,209,102,.25);background:rgba(255,209,102,.07);padding:7px 9px;border-radius:999px;white-space:nowrap}
+.machine-wrap{min-height:540px;display:grid;place-items:center;position:relative}.machine{width:min(440px,93%);aspect-ratio:.83;position:relative;display:flex;flex-direction:column;align-items:center}
+.globe{width:90%;aspect-ratio:1;border:7px solid rgba(255,244,230,.86);border-radius:50%;position:relative;overflow:hidden;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.14),rgba(255,255,255,.03) 44%,rgba(0,0,0,.26));box-shadow:inset 0 -34px 74px rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.08)}
+.globe:before{content:"";position:absolute;inset:9%;border:2px dashed rgba(255,122,24,.26);border-radius:50%}.globe:after{content:"";position:absolute;width:16%;height:74%;left:15%;top:4%;border-left:4px solid rgba(255,255,255,.14);border-radius:50%;transform:rotate(34deg)}
+.rotor{position:absolute;inset:15%;border-radius:50%;border:3px dashed rgba(169,112,255,.24)}.spinning .rotor{animation:rot .9s linear infinite}@keyframes rot{to{transform:rotate(360deg)}}
+.ball{position:absolute;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#281206;font-weight:950;font-size:11px;line-height:1;text-align:center;padding:3px;background:
+linear-gradient(20deg,transparent 47%,rgba(47,19,4,.5) 48% 51%,transparent 52%),
+linear-gradient(110deg,transparent 47%,rgba(47,19,4,.5) 48% 51%,transparent 52%),
+radial-gradient(circle at 34% 27%,#ffd7ad 0 6%,#ffad58 7%,var(--orange) 51%,#d95300 100%);
+box-shadow:inset -8px -10px 13px rgba(80,25,0,.3),0 8px 14px rgba(0,0,0,.32);transition:opacity .32s;user-select:none}
+.spinning .ball{animation:tumble var(--dur,1.3s) ease-in-out infinite alternate;animation-delay:var(--delay,0s)}
+@keyframes tumble{0%{transform:translate(0,0) rotate(-20deg)}25%{transform:translate(var(--x1),var(--y1)) rotate(75deg)}58%{transform:translate(var(--x2),var(--y2)) rotate(170deg)}100%{transform:translate(var(--x3),var(--y3)) rotate(285deg)}}
+.neck{width:76px;height:46px;border-left:6px solid rgba(255,244,230,.86);border-right:6px solid rgba(255,244,230,.86);background:rgba(255,255,255,.03);margin-top:-3px;z-index:3}.chute{width:158px;height:46px;margin-top:-5px;border:6px solid rgba(255,244,230,.86);border-radius:0 0 18px 18px;background:#1b0c04;z-index:4}.base{width:66%;height:78px;border-radius:21px 21px 13px 13px;margin-top:8px;background:linear-gradient(#5e2a0e,#351508);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:9px;box-shadow:0 14px 30px rgba(0,0,0,.3)}.base i{display:block;width:10px;height:10px;border-radius:50%;background:#ff5f5f;box-shadow:0 0 12px rgba(255,95,95,.35)}.base i:nth-child(2){background:var(--gold)}.base i:nth-child(3){background:var(--green)}
+.output-ball{position:absolute;width:94px;height:94px;border-radius:50%;left:50%;top:389px;translate:-50% 0;z-index:8;opacity:0;transform:translateY(-20px) scale(.6);display:grid;place-items:center;text-align:center;padding:8px;color:#281206;font-size:17px;font-weight:950;background:
+linear-gradient(20deg,transparent 47%,rgba(47,19,4,.52) 48% 51%,transparent 52%),
+linear-gradient(110deg,transparent 47%,rgba(47,19,4,.52) 48% 51%,transparent 52%),
+radial-gradient(circle at 34% 27%,#ffd7ad 0 6%,#ffad58 7%,var(--orange) 51%,#d95300 100%);box-shadow:inset -10px -12px 16px rgba(80,25,0,.27),0 18px 34px rgba(0,0,0,.45),0 0 0 7px rgba(255,122,24,.14)}
+.output-ball.pop{animation:popBall 1.55s cubic-bezier(.17,.84,.25,1) forwards}@keyframes popBall{0%{opacity:0;transform:translateY(-42px) scale(.45) rotate(-90deg)}32%{opacity:1;transform:translateY(0) scale(1.12) rotate(10deg)}68%{opacity:1;transform:translateY(8px) scale(1)}100%{opacity:0;transform:translateY(80px) scale(.78)}}
+.pick-burst{position:absolute;right:5px;top:54%;transform:translateY(-50%);min-width:128px;text-align:center;opacity:0}.pick-burst.show{animation:burst 1.55s ease forwards}.pick-burst .num{font-size:44px;line-height:1;color:var(--gold);font-weight:950;letter-spacing:-.07em}.pick-burst .lab{font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}@keyframes burst{0%{opacity:0;transform:translateY(-45%) scale(.8)}24%,80%{opacity:1;transform:translateY(-50%) scale(1)}100%{opacity:0}}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:3px}button{border:0;font:inherit;cursor:pointer}.primary{color:#2b1204;background:linear-gradient(180deg,#ff9c3c,#ff7a18);font-weight:950;border-radius:999px;padding:13px 22px;box-shadow:0 9px 24px rgba(255,122,24,.22)}.primary:disabled{opacity:.55;cursor:not-allowed}.secondary{color:var(--ink);border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;padding:12px 15px}.status{text-align:center;color:var(--muted);margin-top:12px;min-height:24px;font-size:13px}
+.side-card{pa(255,122,24,.22)}.primary:disabled{opacity:.55;cursor:not-allowed}.secondary{color:var(--ink);border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;padding:12px 15px}.status{text-align:center;color:var(--muted);margin-top:12px;min-height:24px;font-size:13px}
+.side-card{padding:18px}.side-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:1px solid var(--line)}.side-head h2{margin:0;font-size:17px}.side-head span{font-size:10px;color:var(--muted);letter-spacing:.06em}.results{display:grid;gap:7px;margin-top:13px}.row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:9px 11px;background:rgba(255,255,255,.025);min-height:53px;transition:.25s ease}.row.revealed{background:rgba(255,122,24,.07);border-color:rgba(255,122,24,.22)}.pick{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.05);color:var(--gold);font-weight:950}.name{color:#735f50;font-weight:850}.row.revealed .name{color:var(--ink)}.tag{color:#735f50;font-size:10px}.row.revealed .tag{color:var(--orange2)}.fineprint{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.5}.hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#e1d1c4;word-break:break-all}
+.confetti{position:fixed;top:-20px;width:9px;height:14px;border-radius:2px;z-index:30;pointer-events:none;animation:fall var(--fd) linear forwards;background:var(--orange)}.confetti:nth-child(3n){background:var(--gold)}.confetti:nth-child(4n){background:var(--purple)}.confetti:nth-child(5n){background:#fff}@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(720deg);opacity:.7}}
+@media(max-width:850px){main{width:min(100% - 18px,660px);padding-top:22px}.layout{grid-template-columns:1fr}.machine-wrap{min-height:485px}.pick-burst{right:0;top:49%}}
+@media(max-width:470px){.machine-card{padding:14px 10px 17px}.machine-wrap{min-height:435px}.machine{width:360px;max-width:100%}.ball{width:49px;height:49px;font-size:9px}.output-ball{width:80px;height:80px;font-size:14px;top:342px}.pick-burst{display:none}.base{height:63px}.lock{font-size:9px}.row{grid-template-columns:43px 1fr auto;padding:8px 9px}.side-card{padding:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="court"></div>
+<main>
+<header>
+  <div class="eyebrow"><span class="dot"></span> 2026 Fantasy Basketball Lottery</div>
+  <h1>Fantasy Basketball <span>Draft Order</span></h1>
+  <p class="sub">Twelve managers. One official draw. The basketballs come out in reverse order — <strong>#12 all the way to #1</strong>. Once revealed, the result is permanently locked.</p>
+</header>
+<section class="layout">
+  <div class="card machine-card">
+    <div class="machine-top"><strong>Basketball Lottery Machine</strong><span class="lock">🔒 ONE OFFICIAL DRAW</span></div>
+    <div class="machine-wrap">
+      <div class="machine" id="machine">
+        <div class="globe">
+          <div class="rotor"></div>
+          <div class="ball" data-name="Ben" style="left:10%;top:14%;--x1:55px;--y1:55px;--x2:120px;--y2:96px;--x3:72px;--y3:138px;--dur:1.18s;--delay:-.2s">Ben</div>
+          <div class="ball" data-name="Negus" style="left:34%;top:10%;--x1:-70px;--y1:68px;--x2:76px;--y2:130px;--x3:-32px;--y3:98px;--dur:1.41s;--delay:-.8s">Negus</div>
+          <div class="ball" data-name="Alan" style="left:61%;top:15%;--x1:-86px;--y1:40px;--x2:-38px;--y2:132px;--x3:-88px;--y3:80px;--dur:1.31s;--delay:-.5s">Alan</div>
+          <div class="ball" data-name="Amir" style="left:76%;top:30%;--x1:-128px;--y1:18px;--x2:-68px;--y2:102px;--x3:-112px;--y3:-34px;--dur:1.49s;--delay:-.1s">Amir</div>
+          <div class="ball" data-name="Sebastian" style="left:17%;top:38%;--x1:102px;--y1:-62px;--x2:72px;--y2:82px;--x3:132px;--y3:20px;--dur:1.24s;--delay:-.9s">Sebastian</div>
+          <div class="ball" data-name="Mike" style="left:44%;top:34%;--x1:-58px;--y1:-82px;--x2:54px;--y2:118px;--x3:-72px;--y3:34px;--dur:1.43s;--delay:-.3s">Mike</div>
+          <div class="ball" data-name="Puneet" style="left:66%;top:48%;--x1:-112px;--y1:-66px;--x2:-66px;--y2:62px;--x3:-24px;--y3:-104px;--dur:1.27s;--delay:-.6s">Puneet</div>
+          <div class="ball" data-name="Marquis" style="left:8%;top:62%;--x1:96px;--y1:-112px;--x2:150px;--y2:-22px;--x3:62px;--y3:-132px;--dur:1.47s;--delay:-.7s">Marquis</div>
+          <div class="ball" data-name="Fello" style="left:29%;top:69%;--x1:-42px;--y1:-136px;--x2:82px;--y2:-86px;--x3:-28px;--y3:-58px;--dur:1.21s;--delay:-.4s">Fello</div>
+          <div class="ball" data-name="Kedus" style="left:49%;top:65%;--x1:-92px;--y1:-126px;--x2:22px;--y2:-58px;--x3:-82px;--y3:-96px;--dur:1.36s;--delay:-.15s">Kedus</div>
+          <div class="ball" data-name="Austin" style="left:69%;top:69%;--x1:-126px;--y1:-88px;--x2:-98px;--y2:-132px;--x3:-48px;--y3:-44px;--dur:1.29s;--delay:-.52s">Austin</div>
+          <div class="ball" data-name="Kha" style="left:40%;top:50%;--x1:42px;--y1:-122px;--x2:-102px;--y2:64px;--x3:74px;--y3:-76px;--dur:1.52s;--delay:-.33s">Kha</div>
+        </div>
+        <div class="neck"></div><div class="chute"></div><div class="base"><i></i><i></i><i></i></div>
+      </div>
+      <div class="output-ball" id="outputBall">?</div>
+      <div class="pick-burst" id="pickBurst"><div class="num" id="burstNum">#12</div><div class="lab">Draft Pick</div></div>
+    </div>
+    <div class="controls"><button class="primary" id="startBtn" type="button">Start Official Draw</button><button class="secondary" id="soundBtn" type="button" aria-pressed="true">🔊 Sound on</button></div>
+    <div class="status" id="status" aria-live="polite">Ready to reveal pick #12.</div>
+  </div>
+  <aside class="card side-card">
+    <div class="side-head"><h2>Draft Board</h2><span>REVEALING 12 → 1</span></div>
+    <div class="results" id="results"></div>
+    <div class="fineprint">The official randomized result is permanently locked into this site. <strong>Replay only replays the animation</strong> — it cannot create a new order.<br><br>Audit fingerprint: <span class="hash">4f326699c41fdab1</span></div>
+  </aside>
+</section>
+</main>
+<script>
+// OFFICIAL LOCKED RESULT. Index 0 is pick #12; index 11 is pick #1.
+const OFFICIAL_REVERSE_ORDER=["Sebastian","Marquis","Mike","Alan","Kedus","Amir","Puneet","Fello","Austin","Kha","Ben","Negus"];
+const PICKS=[12,11,10,9,8,7,6,5,4,3,2,1];let running=false,soundOn=true,audioCtx=null;
+const machine=document.getElementById('machine'),outputBall=document.getElementById('outputBall'),pickBurst=document.getElementById('pickBurst'),burstNum=document.getElementById('burstNum'),startBtn=document.getElementById('startBtn'),soundBtn=document.getElementById('soundBtn'),status=document.getElementById('status'),results=document.getElementById('results'),sourceBalls=[...document.querySelectorAll('.globe .ball')];
+function buildBoard(){results.innerHTML='';PICKS.forEach(pick=>{const row=document.createElement('div');row.className='row';row.dataset.pick=pick;row.innerHTML=`<div class="pick">#${pick}</div><div class="name">Waiting…</div><div class="tag">LOCKED</div>`;results.appendChild(row)})}
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function beep(freq=520,duration=.1,type='sine'){if(!soundOn)return;try{audioCtx||=new(window.AudioContext||window.webkitAudioContext)();const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.001,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.15,audioCtx.currentTime+.015);gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);osc.connect(gain);gain.connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+duration+.03)}catch(_){}}
+function revealRow(index,name){const row=results.children[index];row.classList.add('revealed');row.querySelector('.name').textContent=name;row.querySelector('.tag').textContent='REVEALED'}
+function confetti(){for(let i=0;i<100;i++){const c=document.createElement('i');c.className='confetti';c.style.left=`${Math.random()*100}vw`;c.style.setProperty('--fd',`${2.5+Math.random()*2.7}s`);c.style.setProperty('--drift',`${-100+Math.random()*200}px`);c.style.transform=`rotate(${Math.random()*360}deg)`;document.body.appendChild(c);setTimeout(()=>c.remove(),5700)}}
+async function reveal(index){const name=OFFICIAL_REVERSE_ORDER[index],pick=PICKS[index];status.textContent=`Mixing the cage for pick #${pick}…`;machine.classList.add('spinning');beep(170,.08,'square');await sleep(index===0?1600:1120);const source=sourceBalls.find(b=>b.dataset.name===name);if(source)source.style.opacity='.08';machine.classList.remove('spinning');outputBall.textContent=name;outputBall.classList.remove('pop');pickBurst.classList.remove('show');void outputBall.offsetWidth;burstNum.textContent=`#${pick}`;outputBall.classList.add('pop');pickBurst.classList.add('show');beep(680,.17,'triangle');setTimeout(()=>beep(930,.15,'triangle'),100);status.textContent=`Pick #${pick}: ${name}!`;revealRow(index,name);await sleep(1220)}
+async function runDraw(){if(running)return;running=true;startBtn.disabled=true;startBtn.textContent='Drawing…';buildBoard();sourceBalls.forEach(b=>b.style.opacity='1');for(let i=0;i<OFFICIAL_REVERSE_ORDER.length;i++){await reveal(i);if(i<OFFICIAL_REVERSE_ORDER.length-1)await sleep(610)}running=false;startBtn.disabled=false;startBtn.textContent='↻ Replay Reveal';status.innerHTML=`🏆 <strong>${OFFICIAL_REVERSE_ORDER[11]}</strong> has the #1 pick. Official order locked.`;[440,554,659,880].forEach((f,i)=>setTimeout(()=>beep(f,.2,'triangle'),i*105));confetti();try{localStorage.setItem('fantasy-basketball-lottery-viewed','1')}catch(_){}}
+startBtn.addEventListener('click',runDraw);soundBtn.addEventListener('click',()=>{soundOn=!soundOn;soundBtn.setAttribute('aria-pressed',String(soundOn));soundBtn.textContent=soundOn?'🔊 Sound on':'🔇 Sound off';if(soundOn)beep(620,.08,'triangle')});buildBoard();try{if(localStorage.getItem('fantasy-basketball-lottery-viewed')==='1'){startBtn.textContent='↻ Replay Reveal';status.textContent='Official draw is locked. Replay whenever you want.'}}catch(_){ }
+</script>
+</body>
+</html>
